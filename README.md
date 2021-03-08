@@ -5,15 +5,11 @@ This repository contains the specific files needed to enable Thread on Qorvo pla
 Example applications on the different platforms are available in the openthread repository,
 which can be found under:
 
-> <https://github.com/openthread/openthread>
-
-## Version
-
-0.8.0.0
+[https://github.com/openthread/openthread](https://github.com/openthread/openthread)
 
 ## License file
 
-[LICENSE](LICENSE.txt)
+Source code in this repository is covered by the license agreement in [Qorvo_EULA.txt](Qorvo_EULA.txt).
 
 ## Description
 
