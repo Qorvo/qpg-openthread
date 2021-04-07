@@ -1,12 +1,15 @@
 # Ignore everything in this directory
 *
+
 # Except this file
 !.gitignore
-# pdf files
+# Except pdf files
 !*.pdf
-# markdown files
+# Except markdown files
 !*.md
-# images
-!*.png
-!*.jpg
-!*.jpeg
+# Except images in ./imgs
+!imgs/
+imgs/*
+!imgs/*.png
+!imgs/*.jpg
+!imgs/*.jpeg
