@@ -2,7 +2,7 @@
 
 This repository contains the specific files needed to enable Thread on Qorvo platforms.
 
-Example applications on the different platforms are available in the [Qorvo OpenThread repository](https://github.com/openthread/ot-qorvo)
+Example applications and build instructionss for each of our platforms can be found [below](#supported-platforms).
 
 ## License file
 
