@@ -1,11 +1,11 @@
 # GP712 User Manual
 
-*OpenThread* is an open source implementation of Thread networking protocols developed by the Thread group. It allows 802.15.4-capable devices to build robust dynamic mesh networks.  
+*OpenThread* is an open source implementation of Thread networking protocols developed by the Thread group. It allows 802.15.4-capable devices to build robust dynamic mesh networks. 
 This document provides the reader with instructions on how to run a Thread application using the *OpenThread* stack with the GP712.
 
 The Qorvo GP712 System-on-Chip ([controller specification](https://www.qorvo.com/products/p/GP712)) is an IEEE 802.15.4 multi-stack multi-channel communications controller for integration into a Zigbee® or Thread node. The GP712 interference robustness and antenna diversity offer superior performance in a crowded wireless 2.4 GHz environment.
 
-![GP712 Development kit](./imgs/gp712.png "GP712 Development kit")
+![GP712 Development Kit](./imgs/gp712.png "GP712 Development Kit")
 
 ---
 
@@ -17,8 +17,8 @@ The Qorvo GP712 System-on-Chip ([controller specification](https://www.qorvo.com
     - [Architecture](#architecture)
     - [Getting Qorvo *OpenThread*](#getting-qorvo-openthread)
     - [Command Line Interface (CLI) build for the GP712](#command-line-interface-cli-build-for-the-gp712)
-  - [Running Thread](#running-thread)
-    - [Interacting with the Thread Network through the CLI](#interacting-with-the-thread-network-through-the-cli)
+  - [Programming the GP712](#programming-the-gp712)
+  - [Interacting with the Thread Network through the CLI](#interacting-with-the-thread-network-through-the-cli)
   - [Additional resources](#additional-resources)
 
 ---
@@ -27,7 +27,7 @@ The Qorvo GP712 System-on-Chip ([controller specification](https://www.qorvo.com
 
 ### Hardware
 
-The GP712 development kit contains a RPi, a GP712 module and an SD card with the necessary drivers.
+The GP712 Development Kit contains a Raspberry Pi (RPi), a GP712 module and an SD card with the necessary drivers.
 
 ### Software
 
@@ -41,7 +41,7 @@ Next install *Git*
 
     sudo apt-get install git -y
 
-Get a cross compiler toolchain for Raspberry Pi (RPi)
+Get a cross compiler toolchain for Raspberry Pi
 
     git clone https://github.com/raspberrypi/tools.git
 
@@ -53,7 +53,7 @@ The toolchain can now be found under
 
 ### Architecture
 
-Running Thread on a GP712 is split into two major blocks: the *Host* and the GP712 firmware. The latter is preprogrammed requires no user interaction.
+Running Thread on a GP712 is split into two major blocks: the *Host* and the GP712 firmware. The latter is preprogrammed and requires no user interaction.
 
 ![Architectural overview](./imgs/architecture.png "Architectural overview")
 
@@ -80,9 +80,9 @@ From top to bottom:
 - Kernel drivers
   - Driver `.ko` files, the necessary deploy instruction and other documentation need to be obtained through <LPW.support@qorvo.com> or through your business contact.
 
-All the parts in _User space_ will be compiled into a single executable `.elf` file. This executable communicates with RPi kernel drivers provided in the GP712 development kit.
+All the parts in _User space_ will be compiled into a single executable `.elf` file. This executable communicates with the RPi kernel drivers provided in the GP712 Development Kit.
 
-To obtain the development kit and associated drivers contact us at <LPW.support@qorvo.com> or through your business contact.
+To obtain the Development Kit and associated drivers contact us at <LPW.support@qorvo.com> or through your business contact.
 
 ### Getting Qorvo *OpenThread*
 
@@ -92,7 +92,7 @@ First get the latest version of *ot-qorvo* and its submodules
     cd ot-qorvo
     git submodule update --init --recursive
 
-The `git submodule update` command will, populate the `openthread` directory with the openthread core implementation and `third_party/Qorvo/repo` with pre-compiled libraries.
+The `git submodule update` command will populate the `openthread` directory with the openthread core implementation and `third_party/Qorvo/repo` with pre-compiled libraries.
 
 All commands and scripts are run from the openthread root directory.
 
@@ -100,12 +100,14 @@ To resolve any outstanding dependencies to build *OpenThread*, run the optional
 
     ./script/bootstrap
 
-**Note 1:** The script will install a *gnu embedded toolchain*, but the one in [Prerequisites](#Prerequisites) will be used in this example.  
+**Note 1:** The script will install a *gnu embedded toolchain*, but the one in [Prerequisites](#prerequisites) will be used in this example.  
 **Note 2:** The final step of this script will fail if _Linuxbrew_ is not installed. The error can be ignored.
 
 ### Command Line Interface (CLI) build for the GP712
 
-This is the most common build. It enables the user to control the thread stack parameters, to join/commission devices, etc. by connecting to a Command Line Interface (CLI) server. We're opening a socket in userspace for this on Linux based platforms.
+This is the most common build. It enables the user to control the thread stack parameters, to join/commission devices, etc. by connecting to a Command Line Interface (CLI) server.
+
+**Note:** This guide will cross compile for the Raspberry Pi. It is possible to make the builds natively on a Raspberry Pi, but we found the cross compilation to be faster.
 
 First, add the compiler to `$PATH`
 
@@ -132,21 +134,21 @@ For a *MTD*, the following is sufficient
 
 **Note:** both the above command will always build both the *FTD* and *MTD* executable. But it is unnecessary for a *MTD* device to support e.g. the *Commissioner* role or the DHCP server functionality.
 
-## Running Thread
+## Programming the GP712
 
 Programming the executable, means just copying it to a RPi and making sure it is executable.
 
     chmod +x gp712-ot-cli-ftd.elf
 
-To run it, one first has to make sure the kernel drivers are loaded and have a communications channel with the `*.elf`. Instructions for this come with the GP712 development kit.
+To run it, one first has to make sure the kernel drivers are loaded and have a communications channel with the `*.elf`. Instructions for this come with the GP712 Development Kit.
 
-### Interacting with the Thread Network through the CLI
+## Interacting with the Thread Network through the CLI
 
 Run the executable
 
     ./gp712-ot-cli-ftd.elf
 
-This should launch the CLI client.
+This launches the CLI client.
 
 Validating the Thread operation can be done by running the scenarios [here](../../general/thread_validation.md).
 

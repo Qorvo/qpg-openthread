@@ -1,11 +1,11 @@
 # QPG6095 User Manual
 
-*OpenThread* is an open source implementation of Thread networking protocols developed by the Thread group. It allows 802.15.4-capable devices to build robust dynamic mesh networks.  
+*OpenThread* is an open source implementation of Thread networking protocols developed by the Thread group. It allows 802.15.4-capable devices to build robust dynamic mesh networks. 
 This document provides the reader with instructions on how to run a Thread application using the *OpenThread* stack with the QPG6095.
 
 The QPG6095 ([specification](https://www.qorvo.com/products/p/QPG6095)) is a [Thread Certified](https://www.threadgroup.org/What-is-Thread/Thread-Benefits#certifiedproducts) Zigbee® / Thread / Bluetooth® Low Energy Smart Home Communications Controller provides a fully integrated solution for ultra-low power wireless communications for Smart Home sentroller devices
 
-![QPG6095 Development kit](./imgs/qpg6095.png "QPG6095 Development kit")
+![QPG6095 Development Kit](./imgs/qpg6095.png "QPG6095 Development Kit")
 
 ---
 
@@ -16,7 +16,7 @@ The QPG6095 ([specification](https://www.qorvo.com/products/p/QPG6095)) is a [Th
   - [Building *OpenThread*](#building-openthread)
     - [Architecture](#architecture)
     - [Getting Qorvo *OpenThread*](#getting-qorvo-openthread)
-    - [Command Line Interface (CLI) build for the GP6095](#command-line-interface-cli-build-for-the-gp6095)
+    - [Command Line Interface (CLI) build for the QPG6095](#command-line-interface-cli-build-for-the-qpg6095)
   - [Programming the QPG6095](#programming-the-qpg6095)
   - [Interacting with the Thread Network through the CLI](#interacting-with-the-thread-network-through-the-cli)
   - [Additional resources](#additional-resources)
@@ -27,7 +27,7 @@ The QPG6095 ([specification](https://www.qorvo.com/products/p/QPG6095)) is a [Th
 
 ### Hardware
 
-A QPG6095 development board and a standard USB A to USB B mini cable. Both are included in the QPG6095 development kit.
+A QPG6095 development board and a standard USB A to USB B mini cable. Both are included in the QPG6095 Development Kit.
 
 ### Software
 
@@ -69,7 +69,7 @@ From top to bottom:
   - specifically (relative to *location*):
     - `ld/qpg6095.ld`: linker script for the QPG6095
     - `lib/libQorvoQPG6095_ftd.a`: library for *Full Thread Device* support
-    - `libQorvoQPG6095_mtd.a`: library for *Sleepy Device* support
+    - `lib/libQorvoQPG6095_mtd.a`: library for *Sleepy Device* support
 
 All the above will be compiled into a single executable `.hex` file.
 
@@ -81,7 +81,7 @@ First get the latest version of *ot-qorvo* and its submodules
     cd ot-qorvo
     git submodule update --init --recursive
 
-The `git submodule update` command will, populate the `openthread` directory with the openthread core implementation and `third_party/Qorvo/repo` with pre-compiled libraries and linker scripts.
+The `git submodule update` command will populate the `openthread` directory with the openthread core implementation and `third_party/Qorvo/repo` with pre-compiled libraries and the necessary linker scripts.
 
 All commands and scripts are run from the openthread root directory.
 
@@ -89,10 +89,10 @@ To resolve any outstanding dependencies to build *OpenThread*, run the optional
 
     ./script/bootstrap
 
-**Note 1:** The script will install a *gnu embedded toolchain*, but the one in [Prerequisites](#Prerequisites) will be used in this example.  
+**Note 1:** The script will install a *gnu embedded toolchain*, but the one in [Prerequisites](#prerequisites) will be used in this example.  
 **Note 2:** The final step of this script will fail if _Linuxbrew_ is not installed. The error can be ignored.
 
-### Command Line Interface (CLI) build for the GP6095
+### Command Line Interface (CLI) build for the QPG6095
 
 This is the most common build. It enables the user to control the thread stack parameters, to join/commission devices, etc. by connecting to a Command Line Interface (CLI) server accessible over UART.
 
@@ -125,7 +125,7 @@ For a *MTD*, the following is sufficient
 
 When inserting the USB cable into your build machine a *DAPLINK* should appear. Drag and drop the `.hex` output file to the *DAPLINK* drive and wait \~30sec. The QPG6095 will reprogram itself, unmount and remount itself on your host, if the programming succeeded, there should be no `FAIL.txt` file on the remounted drive.
 
-Alternative ways, such as using a J-Link, to program the QPG6095 are outlined in the documentation package that comes with the QGP6100 development kit.
+Alternative ways, such as using a J-Link, to program the QPG6095 are outlined in the documentation package that comes with the QPG6095 Development Kit.
 
 ## Interacting with the Thread Network through the CLI
 
@@ -137,7 +137,7 @@ Start with a QPG6095 board with the `qpg6095-ot-cli-ftd.hex` programmed. The dev
 > - Parity: None
 > - Flow control: XON/XOFF
 
-Validating the Thread operation can be done by running the scenarios [here](../..general/thread_validation.md).
+Validating the Thread operation can be done by running the scenarios [here](../../general/thread_validation.md).
 
 ## Additional resources
 

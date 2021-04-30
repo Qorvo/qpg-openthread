@@ -1,12 +1,12 @@
 # QPG6100 User Manual
 
-*OpenThread* is an open source implementation of Thread networking protocols developed by the Thread group. It allows 802.15.4-capable devices to build robust dynamic mesh networks.  
+*OpenThread* is an open source implementation of Thread networking protocols developed by the Thread group. It allows 802.15.4-capable devices to build robust dynamic mesh networks. 
 This document provides the reader with instructions on how to run a Thread application using the *OpenThread* stack with the QPG6100.
 
 The QPG6100 ([specification](https://www.qorvo.com/products/p/QPG6100)) is a multi-standard Smart Home Communications Controller featuring Dynamic Multi-Protocol and ConcurrentConnect™ technology. This enables Bluetooth® Low Energy, Zigbee® and Thread to operate simultaneously in a single chip design.  
 ConcurrentConnect™ technology: allowing instantaneous switching between Bluetooth Low Energy and IEEE 802.15.4 protocols with no observable blind spots.
 
-![QPG6100 Development kit](./imgs/qpg6100.png "QPG6100 Development kit")
+![QPG6100 Development kit](./imgs/qpg6100.png "QPG6100 Development Kit")
 
 ---
 
@@ -28,7 +28,7 @@ ConcurrentConnect™ technology: allowing instantaneous switching between Blueto
 
 ### Hardware
 
-A QPG6100 development board and a standard USB A to USB B mini cable. Both are included in the QPG6100 development kit.
+A QPG6100 development board and a standard USB A to USB B mini cable. Both are included in the QPG6100 Development Kit.
 
 ### Software
 
@@ -57,7 +57,7 @@ From top to bottom:
 
 - The Application:  
   - location: [`openthread/example/apps`](https://github.com/openthread/openthread/tree/main/examples/apps)
-  - what: For this example the *OpenThread CLI* application will be build. This application allows the manipulation of the Thread stack over a serial interface.
+  - what: For this example the *OpenThread CLI* application will be built. This application allows the manipulation of the Thread stack over a serial interface.
 - OpenThread Stack:
   - location: [`openthread/src/`](https://github.com/openthread/openthread/tree/main/src)
   - what: implements the [Thread specification](https://www.threadgroup.org/ThreadSpec). It can be configured through a set of [configure switches](https://github.com/openthread/openthread/tree/master/examples/common-switches.mk).
@@ -70,7 +70,7 @@ From top to bottom:
   - specifically (relative to *location*):
     - `ld/qpg6100.ld`: linker script for the QPG6100
     - `lib/libQorvoQPG6100_ftd.a`: library for *Full Thread Device* support
-    - `libQorvoQPG6100_mtd.a`: library for *Sleepy Device* support
+    - `lib/libQorvoQPG6100_mtd.a`: library for *Sleepy Device* support
     - `lib/libmbedtls_alt.a`: hardware support for cryptographic operations
 
 All the above will be compiled into a single executable `.hex` file.
@@ -83,7 +83,7 @@ First get the latest version of *ot-qorvo* and its submodules
     cd ot-qorvo
     git submodule update --init --recursive
 
-The `git submodule update` command will, populate the `openthread` directory with the openthread core implementation and `third_party/Qorvo/repo` with pre-compiled libraries and linker scripts.
+The `git submodule update` command will populate the `openthread` directory with the openthread core implementation and `third_party/Qorvo/repo` with pre-compiled libraries and the necessary linker scripts.
 
 All commands and scripts are run from the openthread root directory.
 
@@ -91,7 +91,7 @@ To resolve any outstanding dependencies to build *OpenThread*, run the optional
 
     ./script/bootstrap
 
-**Note 1:** The script will install a *gnu embedded toolchain*, but the one in [Prerequisites](#Prerequisites) will be used in this example.  
+**Note 1:** The script will install a *gnu embedded toolchain*, but the one in [Prerequisites](#prerequisites) will be used in this example.  
 **Note 2:** The final step of this script will fail if _Linuxbrew_ is not installed. The error can be ignored.
 
 ### Command Line Interface (CLI) build for the QPG6100
@@ -127,7 +127,7 @@ For a *MTD*, the following is sufficient
 
 When inserting the USB cable into your build machine a *DAPLINK* should appear. Drag and drop the `.hex` output file to the *DAPLINK* drive and wait \~30sec. The QPG6100 will reprogram itself, unmount and remount itself on your host, if the programming succeeded, there should be no `FAIL.txt` file on the remounted drive.
 
-Alternative ways, such as using a J-Link, to program the QPG6100 are outlined in the documentation package that comes with the QGP6100 development kit.
+Alternative ways, such as using a J-Link, to program the QPG6100 are outlined in the documentation package that comes with the QPG6100 Development Kit.
 
 ## Interacting with the Thread Network through the CLI
 

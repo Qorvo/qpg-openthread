@@ -2,7 +2,7 @@
 
 This repository contains the specific files needed to enable Thread on Qorvo platforms.
 
-Example applications and build instructionss for each of our platforms can be found [below](#supported-platforms).
+Example applications and build instructions for each of our platforms can be found [below](#supported-platforms).
 
 ## License file
 
@@ -30,7 +30,7 @@ a purely software implementation is used on the other platforms.
 
 #### QPG6095
 
-Thread examples are available for the QPG6095 Development Kit board. See [QPG6095 instructions](qpg6095/doc/README.md) to setup an OpenThread application on these platforms.
+Thread examples are available for the QPG6095 Development Kit board. See [QPG6095 instructions](qpg6095/doc/README.md) to setup an OpenThread application on this platform.
 
 All files required are stored in this repository under
 
@@ -38,7 +38,7 @@ All files required are stored in this repository under
 
 #### QPG6100
 
-Thread examples are available for the QPG6100 Development Kit board. See [QPG6100 instructions](qpg6100/doc/README.md) to setup an OpenThread application on these platforms.
+Thread examples are available for the QPG6100 Development Kit board. See [QPG6100 instructions](qpg6100/doc/README.md) to setup an OpenThread application on this platform.
 
 All files required are stored in this repository under
 
@@ -48,7 +48,7 @@ All files required are stored in this repository under
 
 #### GP712
 
-Thread examples are available for the GP712 Evaluation kit with RaspBerry Pi. See [GP712 instructions](gp712/doc/README.md) to setup an OpenThread application on these platforms.
+Thread examples are available for the GP712 Evaluation kit with Raspberry Pi. See [GP712 instructions](gp712/doc/README.md) to setup an OpenThread application on this platform.
 
 All files required are stored in this repository under
 
@@ -56,7 +56,7 @@ All files required are stored in this repository under
 
 #### QPG7015M
 
-Thread examples are available for the QPG7015M Evaluation kit with RaspBerry Pi. See [QPG7015M instructions](qpg7015m/doc/README.md) to setup an OpenThread application on these platforms.
+Thread examples are available for the QPG7015M Evaluation kit with Raspberry Pi. See [QPG7015M instructions](qpg7015m/doc/README.md) to setup an OpenThread application on this platform.
 
 All files required are stored in this repository under
 

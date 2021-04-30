@@ -77,20 +77,20 @@ and the newer, recommended api through the `dataset` command e.g.
 
     > dataset channel 15
     Done
-    > dataset panid 0xf000d
+    > dataset panid 0xf00d
     Done
 
 In the below examples the latter, newer and more extensive dataset api will be used
 
 ## Forming a Thread network
 
-To form a first Thread network we will use two devices. The first, more capable, device will fulfill the _Leader_ role, will act as _Commissioner_ and also, albeit very shortly as a parent.
+To form a first Thread network we will use two devices. The first, more capable, device will fulfill the _Leader_ role, will act as *Commissioner* and also, albeit very shortly as a parent.
 
 The first device needs to be build as follows
 
     make -f examples/Makefile-<platform> COMMISSIONER=1 JOINER=1 DHCP6_CLIENT=1 DHCP6_SERVER=1
 
-Note the explicit enabling of the _Commissioner_ role through `COMMISSIONER=1`.
+Note the explicit enabling of the *Commissioner* role through `COMMISSIONER=1`.
 It is very important that the `<platform>-ot-cli-ftd` executable is programmed on the device under test.
 
 The second device can be less capable
@@ -226,7 +226,7 @@ Since resetting will disable the network interface and the Thread stack, run the
     > thread start
     Done
 
-After bringing up the network interface and the Thread stack again. The device will reattach to the Thread Network and after a while become a router again (Same remarks as in the [_Joining a second node_](#Joining-a-second-node) case apply).
+After bringing up the network interface and the Thread stack again. The device will reattach to the Thread Network and after a while become a router again (Same remarks as in the [_Joining a second node_](#joining-a-second-node-to-the-thread-network) case apply).
 
 Power cycling the device will have the same effect as running the `reset` command. So, similarly
 
@@ -247,4 +247,4 @@ will remove the Active Dataset from non-volatile memory. This can easily seen by
     > dataset active
     Error 23: NotFound
 
-To rejoin the device to the network, a full join procedure as described in [_Joining a second node_](#Joining-a-second-node) has to be executed.
+To rejoin the device to the network, a full join procedure as described in [_Joining a second node_](#joining-a-second-node-to-the-thread-network) has to be executed.
