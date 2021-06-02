@@ -31,13 +31,12 @@ SECTIONS
      */
     .native_user_license   0x4000000 + 0x10 : { KEEP(*(.native_user_license)); } > FLASH
 
-    /* Reserve space for RT system in FLASH */
-    rt_system_start_offset = 0x400;
-    rt_system_start_address = ORIGIN(FLASH) + rt_system_start_offset;
-    .rt_flash    rt_system_start_address : {. = ALIGN(4); *(.rt_flash);    } > FLASH
-    ASSERT((rt_system_start_offset % 0x80 == 0), "RT system start should be aligned on 128 bytes")
-    ASSERT((rt_system_start_address / 0x20000 == . / 0x20000 ), "RT system shall not cross 128kb boundary")
-
+    /* Add the jumptable at this fixed location */
+    jumptable_start_offset = 0x800;
+    datajumptable_start_address  = ORIGIN(FLASH) + jumptable_start_offset;
+    flashjumptable_start_address = datajumptable_start_address + 0x40;
+    .datajumptable   datajumptable_start_address  :  {. = ALIGN(4); KEEP(*(.datajumptable));    } > FLASH
+    .flashjumptable  flashjumptable_start_address :  {. = ALIGN(4); KEEP(*(.flashjumptable));   } > FLASH
     .isr_vector : ALIGN(0x100) { KEEP(*(.isr_vector)); } > FLASH
 
     .text :
@@ -105,8 +104,8 @@ SECTIONS
     /* Check regions are allocated in lower ram */
     ASSERT(_elower_ram < eSYSRAM, "SYSRAM ram full")
 
-    .data : 
-    { 
+    .data :
+    {
         __data_start__ = .;
         *(vtable)
         . = ALIGN (4);
