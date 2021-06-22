@@ -1,6 +1,6 @@
 # QPG6095 User Manual
 
-*OpenThread* is an open source implementation of Thread networking protocols developed by the Thread group. It allows 802.15.4-capable devices to build robust dynamic mesh networks. 
+*OpenThread* is an open source implementation of Thread networking protocols developed by the Thread group. It allows 802.15.4-capable devices to build robust dynamic mesh networks.
 This document provides the reader with instructions on how to run a Thread application using the *OpenThread* stack with the QPG6095.
 
 The QPG6095 ([specification](https://www.qorvo.com/products/p/QPG6095)) is a [Thread Certified](https://www.threadgroup.org/What-is-Thread/Thread-Benefits#certifiedproducts) Zigbee® / Thread / Bluetooth® Low Energy Smart Home Communications Controller provides a fully integrated solution for ultra-low power wireless communications for Smart Home sentroller devices
@@ -69,9 +69,11 @@ From top to bottom:
   - specifically (relative to *location*):
     - `ld/qpg6095.ld`: linker script for the QPG6095
     - `lib/libQorvoQPG6095_ftd.a`: library for *Full Thread Device* support
-    - `lib/libQorvoQPG6095_mtd.a`: library for *Sleepy Device* support
+    - `lib/libQorvoQPG6095_mtd.a`: library for *Minimal End Device* support
 
 All the above will be compiled into a single executable `.hex` file.
+
+**Note:** the `_mtd.hex` executable can mimic sleepy behavior, but will not actually go to sleep. To get a `lib/libQorvoQPG6095_mtd_sleep.a` library, [contact us](#additional-resources).
 
 ### Getting Qorvo *OpenThread*
 
