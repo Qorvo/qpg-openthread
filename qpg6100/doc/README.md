@@ -117,11 +117,11 @@ This will build the CLI application for both the *Minimal Thread Device* and the
 
 For a *FTD* the following build command can be used
 
-    ./script/build qpg6100 -DOT_COMMISSIONER=1 -DOT_DHCP6_CLIENT=1 -DOT_DHCP6_SERVER=1
+    ./script/build qpg6100 -DOT_COMMISSIONER=1 -DOT_DHCP6_CLIENT=1 -DOT_DHCP6_SERVER=1 -DOT_JOINER=ON
 
 For a *MTD*, the following is sufficient
 
-    ./script/build qpg6100 -DOT_DHCP6_CLIENT=1
+    ./script/build qpg6100 -DOT_DHCP6_CLIENT=1 -DOT_JOINER=ON
 
 **Note:** both the above command will always build both the *FTD* and *MTD* executable. But it is unnecessary for a *MTD* device to support e.g. the *Commissioner* role or the DHCP server functionality.
 
