@@ -1,12 +1,20 @@
 /*
- * Copyright (c) 2017, 2021, Qorvo Inc
+ * Copyright (c) 2015-2016, GreenPeak Technologies
+ * Copyright (c) 2017-2022, Qorvo Inc
  */
+/* Generated for A25L080 SPIFLASH */
 
+
+
+
+/* Location of the application entry point */
+/* flash_start_abs 0x4000000 application_offset 0x1800 */
+__app_Start__                             =  0x4001800 ;
 /* Memory Spaces Definitions */
 MEMORY
 {
     RAM  (rxw)      : ORIGIN = 0x20038000, LENGTH = 0x20000
-    FLASH (rx)      : ORIGIN = 0x4000000, LENGTH = 0x100000
+    FLASH (rx)      : ORIGIN = 0x04000000, LENGTH = 0x100000
     FLASH_VIRT (rx) : ORIGIN = 0x04400000, LENGTH = 0x100000
     ROM   (rx)      : ORIGIN = 0x04800000, LENGTH = 0x40000
 }
@@ -23,21 +31,25 @@ SECTIONS
     /* Linkerscript only for contiguous SYS and UCRAM */
     ASSERT(eSYSRAM == sUCRAM, "Non contiguous SYS and UCRAM")
 
-    /*
-     * User license is first - only for FLASH programs.
-     *
+    /* User license is first - only for FLASH programs.
      * BLE/MAC address entries (+0x10) in the user license skipped to
-     * allow injection of custom values by programmer tool.
-     */
+     * allow injection of custom values by programmer tool. */
     .native_user_license   0x4000000 + 0x10 : { KEEP(*(.native_user_license)); } > FLASH
 
-
-    /* Add the jumptable at this fixed location */
+    /* Add the jumptable at this fixed location 0x800 */
     jumptable_start_offset = 0x800;
-    datajumptable_start_address  = ORIGIN(FLASH) + jumptable_start_offset;
+    datajumptable_start_address = 0x4000000 + jumptable_start_offset;
     flashjumptable_start_address = datajumptable_start_address + 0x40;
     .datajumptable   datajumptable_start_address  :  {. = ALIGN(4); KEEP(*(.datajumptable));    } > FLASH
     .flashjumptable  flashjumptable_start_address :  {. = ALIGN(4); KEEP(*(.flashjumptable));   } > FLASH
+
+    /* Reserve space for RT system in FLASH */
+    rt_system_start_offset = 0x1600;
+    rt_system_start_address = ORIGIN(FLASH) + rt_system_start_offset;
+    .rt_flash    rt_system_start_address : {. = ALIGN(4); *(.rt_flash);    } > FLASH
+    ASSERT((rt_system_start_offset % 0x80 == 0), "RT system start should be aligned on 128 bytes")
+    ASSERT((rt_system_start_address / 0x20000 == . / 0x20000 ), "RT system shall not cross 128kb boundary")
+
     .isr_vector : ALIGN(0x100) { KEEP(*(.isr_vector)); } > FLASH
 
 
@@ -165,7 +177,8 @@ SECTIONS
     .gpNvm eFLASH - 0x4000:
     {
         gpNvm_Start = . ;
-        . = 0x4000 ;
+        KEEP(*(gpNvm.data));
+        .  = gpNvm_Start + 0x4000;
         gpNvm_End = . ;
     } > FLASH
 
