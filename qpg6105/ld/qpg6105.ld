@@ -1,6 +1,5 @@
 /*
- * Copyright (c) 2015-2016, GreenPeak Technologies
- * Copyright (c) 2017-2022, Qorvo Inc
+ * Copyright (c) 2020-2022, Qorvo Inc
  */
 /* Generated for A25L080 SPIFLASH */
 
