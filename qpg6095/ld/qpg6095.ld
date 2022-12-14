@@ -40,8 +40,7 @@ MEMORY
 {
   /* Ram origin start 0x1800 after real begin: this is (with some margin) the location of the windows.
      We can move this back, but this means we need to init the windows ourselves */
-  SYSRAM  (rxw) : ORIGIN = 0x20008000, LENGTH = 0x7000 /* reserve 1KB for bootloader */
-  UCRAM  (rxw) : ORIGIN = 0x2000F000, LENGTH = 0x9000
+  RAM  (rxw) : ORIGIN = 0x20008000, LENGTH = 0x10000 /* reserve 1KB for bootloader */
   FLASH (rx) : ORIGIN = 0x4000000, LENGTH = 0x80000
 }
 
@@ -101,25 +100,25 @@ SECTIONS
     __exidx_end = .;
 
 
-    _slower_retain = ORIGIN(SYSRAM) ; /* Start retained memory in sleep */
+    _slower_retain = ORIGIN(RAM) ; /* Start retained memory in sleep */
 
     /* Fixed sections */
-    .mw_crc 0x20008000 : { . += 0x4; } > SYSRAM
-    .crc    0x20008004 : { . += 0x4; } > SYSRAM
-    .ret_hw 0x20008008 : { . += 0x138; } > SYSRAM
-    .ret_sw 0x20008140 : { . += 0x80; }  > SYSRAM
+    .mw_crc 0x20008000 : { . += 0x4; } > RAM
+    .crc    0x20008004 : { . += 0x4; } > RAM
+    .ret_hw 0x20008008 : { . += 0x138; } > RAM
+    .ret_sw 0x20008140 : { . += 0x80; }  > RAM
 
     ASSERT(. >= 0x200081c0, "gpmicro areas must fall into retention areas")
     /* Windowed sections */
-    .ram_regmap :  { . += 0x140; } > SYSRAM /* don't waste the last bytes of the 512-byte window; 0x42930-0x42A00 are not used */
-    .events :      { . += 0x10 ; } > SYSRAM /* 1 events (16 bytes) */
-    .pbm_options : { . += 0x400 ; } > SYSRAM /* 32 PBM options (32 bytes) */
+    .ram_regmap :  { . += 0x140; } > RAM /* don't waste the last bytes of the 512-byte window; 0x42930-0x42A00 are not used */
+    .events :      { . += 0x10 ; } > RAM /* 1 events (16 bytes) */
+    .pbm_options : { . += 0x400 ; } > RAM /* 32 PBM options (32 bytes) */
     /* pbm data is taken from buffers in lower_ram_retain */
 
     /* Data for first 16 KB region */
-    .lower_ram_retain_gpmicro_accessible (NOLOAD) :  { . = ALIGN(4); *(.lower_ram_retain_gpmicro_accessible)   *(.lower_ram_retain_gpmicro_accessible.*); } > SYSRAM
+    .lower_ram_retain_gpmicro_accessible (NOLOAD) :  { . = ALIGN(4); *(.lower_ram_retain_gpmicro_accessible)   *(.lower_ram_retain_gpmicro_accessible.*); } > RAM
     ASSERT (. < 0x20008000+0x4000, ".lower_ram_retain_gpmicro_accessible area outside range")
-    .lower_ram_retain (NOLOAD) :  { . = ALIGN(4); *(.lower_ram_retain)   *(.lower_ram_retain.*); } > SYSRAM
+    .lower_ram_retain (NOLOAD) :  { . = ALIGN(4); *(.lower_ram_retain)   *(.lower_ram_retain.*); } > RAM
 
     .data :
     {
@@ -155,22 +154,19 @@ SECTIONS
         . = ALIGN(4);
         /* All data end */
         __data_end__ = .;
-    } > SYSRAM AT > FLASH
+    } > RAM AT > FLASH
 
     _elower_retain = . ; /* End memory to be retained */
-    .lower_ram_noretain (NOLOAD) :  { . = ALIGN(4); *(.lower_ram_noretain)   *(.lower_ram_noretain.*); } > SYSRAM
+    .lower_ram_noretain (NOLOAD) :  { . = ALIGN(4); *(.lower_ram_noretain)   *(.lower_ram_noretain.*); } > RAM
     _elower_ram = . ;
 
-    /* make sure this goes into ucram */
-    . = ORIGIN(UCRAM);
-
-    .bss :  { . = ALIGN(4); *(.bss)  *(.bss.*) *(COMMON); } > UCRAM
+    .bss :  { . = ALIGN(4); *(.bss)  *(.bss.*) *(COMMON); } > RAM
 
     PROVIDE(_shigher_retain = .);
-    .higher_ram_retain (NOLOAD) :  { . = ALIGN(4); *(.higher_ram_retain)   *(.higher_ram_retain.*); } > UCRAM
-    .bss_uc (NOLOAD) :             { . = ALIGN(4); } > UCRAM
+    .higher_ram_retain (NOLOAD) :  { . = ALIGN(4); *(.higher_ram_retain)   *(.higher_ram_retain.*); } > RAM
+    .bss_uc (NOLOAD) :             { . = ALIGN(4); } > RAM
     PROVIDE(_ehigher_retain = .);
-    .higher_ram_noretain (NOLOAD) :  { . = ALIGN(4); *(.higher_ram_noretain)   *(.higher_ram_noretain.*); } > UCRAM
+    .higher_ram_noretain (NOLOAD) :  { . = ALIGN(4); *(.higher_ram_noretain)   *(.higher_ram_noretain.*); } > RAM
     _ehigher_ram = . ;
 
     /* remove the debugging information from the standard libraries */
@@ -196,9 +192,9 @@ SECTIONS
     _ebss   = ADDR(.bss)  + ALIGN(SIZEOF(.bss),  4);
     _lbss   = _ebss - _sbss;
     /* if more RAM is available, use it.  Use assert to enforce minimum */
-    /* use UCRAM for stack */
+    /* use RAM for stack */
     _sstack = _ehigher_ram;
-    _estack = ORIGIN(UCRAM) + LENGTH(UCRAM);
+    _estack = ORIGIN(RAM) + LENGTH(RAM);
     _sbss_uc = ADDR(.bss_uc);
     _ebss_uc = ADDR(.bss_uc)  + ALIGN(SIZEOF(.bss_uc),  4);
     _lbss_uc = _ebss_uc - _sbss_uc;
