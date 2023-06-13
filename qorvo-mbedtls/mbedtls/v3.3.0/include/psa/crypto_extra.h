@@ -33,7 +33,8 @@
 
 #include "crypto_types.h"
 #include "crypto_compat.h"
-#include "memory.h"
+
+#include "string.h"
 
 /* UID for secure storage seed */
 #define PSA_CRYPTO_ITS_RANDOM_SEED_UID 0xFFFFFF52
@@ -1825,11 +1826,11 @@ psa_status_t psa_pake_abort( psa_pake_operation_t * operation );
  * psa_pake_operation_t.
  */
 #if defined(MBEDTLS_PSA_BUILTIN_PAKE)
-// FIXME: WA for designated initializers to fix error: 
+// FIXME: WA for designated initializers to fix error:
 // "C++ designated initializers only available with '-std=c++20' or '-std=gnu++20'"
 // Pull upstram fix when available or move to c++20
 #else
-// FIXME: WA for designated initializers to fix error: 
+// FIXME: WA for designated initializers to fix error:
 // "C++ designated initializers only available with '-std=c++20' or '-std=gnu++20'"
 // Pull upstram fix when available or move to c++20
 #endif
@@ -1935,7 +1936,7 @@ struct psa_pake_operation_s
     } MBEDTLS_PRIVATE(ctx);
 };
 
-// FIXME: WA for designated initializers to fix error: 
+// FIXME: WA for designated initializers to fix error:
 // "C++ designated initializers only available with '-std=c++20' or '-std=gnu++20'"
 // Pull upstram fix when available or move to c++20
 static struct psa_pake_cipher_suite_s v_pake_cipher_suite;
@@ -1945,7 +1946,7 @@ static inline struct psa_pake_cipher_suite_s psa_pake_cipher_suite_init( void )
     return( v_pake_cipher_suite );
 }
 
-// FIXME: WA for designated initializers to fix error: 
+// FIXME: WA for designated initializers to fix error:
 // "C++ designated initializers only available with '-std=c++20' or '-std=gnu++20'"
 // Pull upstram fix when available or move to c++20
 static struct psa_pake_operation_s v_pake_operation;
