@@ -27,22 +27,13 @@ a purely software implementation is used on the other platforms.
 ## Supported platforms
 
 ### SoC platforms
+#### QPG6105
 
-#### QPG6095
-
-Thread examples are available for the QPG6095 Development Kit board. See [QPG6095 instructions](qpg6095/doc/README.md) to setup an OpenThread application on this platform.
-
-All files required are stored in this repository under
-
-    ./qpg6095
-
-#### QPG6100
-
-Thread examples are available for the QPG6100 Development Kit board. See [QPG6100 instructions](qpg6100/doc/README.md) to setup an OpenThread application on this platform.
+Thread examples are available for the QPG6105 Development Kit board. See [QPG6105 instructions](qpg6105/doc/README.md) to setup an OpenThread application on this platform.
 
 All files required are stored in this repository under
 
-    ./qpg6100
+    ./qpg6105
 
 ### Transceiver/Co-Processor platforms
 

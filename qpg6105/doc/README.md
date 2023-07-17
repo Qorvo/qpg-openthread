@@ -74,7 +74,7 @@ From top to bottom:
 
 All the above will be compiled into a single executable `.hex` file.
 
-**Note:** the `_mtd.hex` executable can mimic sleepy behavior, but will not actually go to sleep. To get a `lib/libQorvoQPG6095_mtd_sleep.a` library, [contact us](#additional-resources).
+**Note:** the `_mtd.hex` executable can mimic sleepy behavior, but will not actually go to sleep. To get a `lib/libQorvoQPG6105_mtd_sleep.a` library, [contact us](#additional-resources).
 
 ### Getting Qorvo *OpenThread*
 
