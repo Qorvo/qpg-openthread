@@ -151,6 +151,13 @@ SECTIONS
     } > RAM AT > FLASH
     .bss :  { . = ALIGN(4); *(.bss)  *(.bss.*) *(COMMON); } > RAM
 
+    /* setting a minimum heap size maximises heap and reduces stack */
+    __dyn_heap_start    = ALIGN(4);
+    __dyn_heap_end      = ORIGIN(RAM) + LENGTH(RAM) - ALIGN(0x800,4);
+    __dyn_heap_size     =  __dyn_heap_end - __dyn_heap_start;
+    ASSERT(__dyn_heap_size >= 0x8000, "HEAP too small")
+    .heap   (NOLOAD) :    ALIGN(4)        { . = ALIGN(4); . += __dyn_heap_size; } > RAM
+
     /* End of memory to be retained */
     _eretain = . ;
 
@@ -192,8 +199,12 @@ SECTIONS
     _sbss   = ADDR(.bss);
     _ebss   = ADDR(.bss)  + ALIGN(SIZEOF(.bss),  4);
     _lbss   = _ebss - _sbss;
-    /* using remaining RAM for stack */
-    _sstack = _eram;
+    _sheap  = ADDR(.heap);
+    _eheap  = ADDR(.heap)  + ALIGN(SIZEOF(.heap),  4);
+    _lheap  = _eheap - _sheap;
+
+    /* stack size is a constant */
+    _sstack = _eheap;
 
     _estack = ORIGIN(RAM) + LENGTH(RAM);
     _lstack = _estack - _sstack;
