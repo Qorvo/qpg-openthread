@@ -27,6 +27,7 @@ a purely software implementation is used on the other platforms.
 ## Supported platforms
 
 ### SoC platforms
+
 #### QPG6105
 
 Thread examples are available for the QPG6105 Development Kit board. See [QPG6105 instructions](qpg6105/doc/README.md) to setup an OpenThread application on this platform.
