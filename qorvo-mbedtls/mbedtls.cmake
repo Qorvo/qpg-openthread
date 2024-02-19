@@ -36,8 +36,6 @@ set_target_properties(qorvo-mbedtls
 
 set(QORVO_MBEDTLS_ALT_DIR "${QORVO_MBEDTLS_SDK_DIR}/mbedtls_alt_3.3.0/")
 set(QORVO_MBEDTLS_DIR "${QORVO_MBEDTLS_SDK_DIR}/mbedtls/v3.3.0/")
-set(MBEDTLS_DIR QORVO_MBEDTLS_DIR)
-
 
 target_compile_definitions(qorvo-mbedtls
     PRIVATE
@@ -58,7 +56,6 @@ target_include_directories(qorvo-mbedtls
         ${QORVO_MBEDTLS_DIR}/library
         ${PROJECT_SOURCE_DIR}/src/${PLATFORM_LOWERCASE}/crypto
     PRIVATE
-        ${PROJECT_SOURCE_DIR}/src/src
         ${QORVO_MBEDTLS_DIR}/include/psa
 )
 
@@ -108,6 +105,7 @@ set(QORVO_MBEDTLS_SOURCES
     ${QORVO_MBEDTLS_DIR}/library/ssl_ticket.c
     ${QORVO_MBEDTLS_DIR}/library/ssl_tls.c
     ${QORVO_MBEDTLS_DIR}/library/ssl_tls12_client.c
+    ${QORVO_MBEDTLS_DIR}/library/ssl_tls12_server.c
     ${QORVO_MBEDTLS_DIR}/library/threading.c
     ${QORVO_MBEDTLS_DIR}/library/x509_create.c
     ${QORVO_MBEDTLS_DIR}/library/x509_crl.c
@@ -119,6 +117,13 @@ set(QORVO_MBEDTLS_SOURCES
 
     ${QORVO_MBEDTLS_SDK_DIR}/src/trng.c
 )
+
+if (OT_MBEDTLS_DEBUG)
+    list(APPEND QORVO_MBEDTLS_SOURCES
+        ${QORVO_MBEDTLS_DIR}/library/debug.c
+        ${QORVO_MBEDTLS_DIR}/library/ssl_debug_helpers_generated.c)
+endif()
+
 set_source_files_properties(${QORVO_MBEDTLS_SOURCES} PROPERTIES LANGUAGE C)
 
 
