@@ -35,7 +35,7 @@
 
 #include "mbedtls/entropy.h"
 
-extern void otPlatEntropyGet(uint8_t *aOutput, uint16_t aOutputLength);
+extern uint8_t otPlatEntropyGet(uint8_t *aOutput, uint16_t aOutputLength);
 
 int mbedtls_hardware_poll( void *data,
                            unsigned char *output,
