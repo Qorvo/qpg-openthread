@@ -51,7 +51,6 @@ SECTIONS
 
     .isr_vector : ALIGN(0x100) { KEEP(*(.isr_vector)); } > FLASH
 
-
     .text :
     {
         . = ALIGN(4);

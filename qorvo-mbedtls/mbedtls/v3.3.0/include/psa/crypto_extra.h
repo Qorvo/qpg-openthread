@@ -33,8 +33,7 @@
 
 #include "crypto_types.h"
 #include "crypto_compat.h"
-
-#include "string.h"
+#include "memory.h"
 
 /* UID for secure storage seed */
 #define PSA_CRYPTO_ITS_RANDOM_SEED_UID 0xFFFFFF52
