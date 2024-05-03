@@ -1,6 +1,6 @@
 # GP712 User Manual
 
-*OpenThread* is an open source implementation of Thread networking protocols developed by the Thread group. It allows 802.15.4-capable devices to build robust dynamic mesh networks. 
+*OpenThread* is an open source implementation of Thread networking protocols developed by the Thread group. It allows 802.15.4-capable devices to build robust dynamic mesh networks.
 This document provides the reader with instructions on how to run a Thread application using the *OpenThread* stack with the GP712.
 
 The Qorvo GP712 System-on-Chip ([controller specification](https://www.qorvo.com/products/p/GP712)) is an IEEE 802.15.4 multi-stack multi-channel communications controller for integration into a Zigbee® or Thread node. The GP712 interference robustness and antenna diversity offer superior performance in a crowded wireless 2.4 GHz environment.
@@ -57,10 +57,10 @@ Running Thread on a GP712 is split into two major blocks: the *Host* and the GP7
 
 ![Architectural overview](./imgs/architecture.png "Architectural overview")
 
-From top to bottom:  
+From top to bottom:
 **Note:** paths are relative to the [root of the ot-qorvo repository](https://github.com/openthread/ot-qorvo)
 
-- The Application:  
+- The Application:
   - location: [`openthread/example/apps`](https://github.com/openthread/openthread/tree/main/examples/apps)
   - what: For this example the *OpenThread CLI* application will be built. This application allows the manipulation of the Thread stack over a serial interface.
 - OpenThread Stack:
@@ -73,7 +73,7 @@ From top to bottom:
     - what: code to interface *OpenThread* with platform specific things such as alarms, storage, random number generator, …
   - Drivers and platform interfaces
     - location: [`third_party/Qorvo/repo/gp712`](https://github.com/Qorvo/qpg-openthread/tree/master/gp712), but hosted in a [Qorvo repository](https://github.com/Qorvo/qpg-openthread)
-    - what: Qorvo specific code, MAC Dispatcher client and libraries required to build for and interface with the GP712 kernel drivers.  
+    - what: Qorvo specific code, MAC Dispatcher client and libraries required to build for and interface with the GP712 kernel drivers.
     specifically(relative to *location*):
       - `lib/libQorvoGP712_ftd.a`: library for *Full Thread Device* support
       - `lib/libQorvoGP712_mtd.a`: library for *Minimal Thread Device* support
@@ -100,7 +100,7 @@ To resolve any outstanding dependencies to build *OpenThread*, run the optional
 
     ./script/bootstrap
 
-**Note 1:** The script will install a *gnu embedded toolchain*, but the one in [Prerequisites](#prerequisites) will be used in this example.  
+**Note 1:** The script will install a *gnu embedded toolchain*, but the one in [Prerequisites](#prerequisites) will be used in this example.
 **Note 2:** The final step of this script will fail if _Linuxbrew_ is not installed. The error can be ignored.
 
 ### Command Line Interface (CLI) build for the GP712
@@ -126,11 +126,11 @@ This will build the CLI application for both the *Minimal Thread Device* and the
 
 For a *FTD* the following build command can be used
 
-    ./script/build gp712 -DOT_COMMISSIONER=1 -DOT_DHCP6_CLIENT=1 -DOT_DHCP6_SERVER=1 -DOT_JOINER=ON
+    ./script/build gp712 -DOT_COMMISSIONER=1 -DOT_DHCP6_CLIENT=1 -DOT_DHCP6_SERVER=1
 
 For a *MTD*, the following is sufficient
 
-    ./script/build gp712 -DOT_DHCP6_CLIENT=1 -DOT_JOINER=ON
+    ./script/build gp712 -DOT_DHCP6_CLIENT=1
 
 **Note:** both the above command will always build both the *FTD* and *MTD* executable. But it is unnecessary for a *MTD* device to support e.g. the *Commissioner* role or the DHCP server functionality.
 
@@ -160,5 +160,3 @@ Please visit [www.qorvo.com](https://www.qorvo.com) for more information on our 
 Additional generic information can be found on
 
 - <https://github.com/openthread/openthread>
-- <https://openthread.io>
-- <https://groups.google.com/g/openthread-users>

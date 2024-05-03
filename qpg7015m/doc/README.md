@@ -1,9 +1,9 @@
 # QPG7015M User Manual
 
-*OpenThread* is an open source implementation of Thread networking protocols developed by the Thread group. It allows 802.15.4-capable devices to build robust dynamic mesh networks. 
+*OpenThread* is an open source implementation of Thread networking protocols developed by the Thread group. It allows 802.15.4-capable devices to build robust dynamic mesh networks.
 This document provides the reader with instructions on how to run a Thread application using the *OpenThread* stack with the QPG7015M.
 
-The QPG7015M ([specification](https://www.qorvo.com/products/p/QPG7015M)) is an IEEE 802.15.4 / Bluetooth® Low Energy Multi-Protocol Multi-Channel Communications Controller for ultra-low power wireless communications for gateways, Smart speakers, Zigbee®/Thread nodes and other Smart Home devices, featuring Qorvo’s ConcurrentConnect™ technology. For IEEE 802.15.4 communications, antenna diversity offers additional robustness in a crowded wireless 2.4 GHz environment. The integrated Power Amplifier (PA) delivers transmit power up to +20 dBm for extended range.  
+The QPG7015M ([specification](https://www.qorvo.com/products/p/QPG7015M)) is an IEEE 802.15.4 / Bluetooth® Low Energy Multi-Protocol Multi-Channel Communications Controller for ultra-low power wireless communications for gateways, Smart speakers, Zigbee®/Thread nodes and other Smart Home devices, featuring Qorvo’s ConcurrentConnect™ technology. For IEEE 802.15.4 communications, antenna diversity offers additional robustness in a crowded wireless 2.4 GHz environment. The integrated Power Amplifier (PA) delivers transmit power up to +20 dBm for extended range.
 ConcurrentConnect™ technology: allowing instantaneous switching between Bluetooth Low Energy and IEEE 802.15.4 protocols with no observable blind spots.
 
 ![QPG7015M Development Kit](./imgs/qpg7015m.png "QPG7015M Development Kit")
@@ -58,10 +58,10 @@ Running Thread on a QPG7015M is split into two major blocks: the *Host* and the 
 
 ![Architectural overview](./imgs/architecture.png "Architectural overview")
 
-From top to bottom:  
+From top to bottom:
 **Note:** paths are relative to the [root of the ot-qorvo repository](https://github.com/openthread/ot-qorvo)
 
-- The Application:  
+- The Application:
   - location: [`openthread/example/apps`](https://github.com/openthread/openthread/tree/main/examples/apps)
   - what: For this example the *OpenThread CLI* application will be built. This application allows the manipulation of the Thread stack over a serial interface.
 - OpenThread Stack:
@@ -74,7 +74,7 @@ From top to bottom:
     - what: code to interface *OpenThread* with platform specific things such as alarms, storage, random number generator, …
   - Drivers and platform interfaces
     - location: [`third_party/Qorvo/repo/qpg7015m`](https://github.com/Qorvo/qpg-openthread/tree/master/qpg7015m), but hosted in a [Qorvo repository](https://github.com/Qorvo/qpg-openthread)
-    - what: Qorvo specific code, MAC Dispatcher client and libraries required to build for and interface with the QPG7015M kernel drivers.  
+    - what: Qorvo specific code, MAC Dispatcher client and libraries required to build for and interface with the QPG7015M kernel drivers.
     specifically(relative to *location*):
       - `lib/libQorvoQPG7015M_ftd.a`: library for *Full Thread Device* support
       - `lib/libQorvoQPG7015M_mtd.a`: library for *Minimal Thread Device* support
@@ -101,7 +101,7 @@ To resolve any outstanding dependencies to build *OpenThread*, run the optional
 
     ./script/bootstrap
 
-**Note 1:** The script will install a *gnu embedded toolchain*, but the one in [Prerequisites](#prerequisites) will be used in this example.  
+**Note 1:** The script will install a *gnu embedded toolchain*, but the one in [Prerequisites](#prerequisites) will be used in this example.
 **Note 2:** The final step of this script will fail if _Linuxbrew_ is not installed. The error can be ignored.
 
 ### Command Line Interface (CLI) build for the QPG7015M
@@ -161,5 +161,3 @@ Please visit [www.qorvo.com](https://www.qorvo.com) for more information on our 
 Additional generic information can be found on
 
 - <https://github.com/openthread/openthread>
-- <https://openthread.io>
-- <https://groups.google.com/g/openthread-users>

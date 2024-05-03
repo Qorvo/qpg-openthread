@@ -3,9 +3,8 @@
 *OpenThread* is an open source implementation of Thread networking protocols developed by the Thread group. It allows 802.15.4-capable devices to build robust dynamic mesh networks.
 This document provides the reader with instructions on how to run a Thread application using the *OpenThread* stack with the QPG6105.
 
-The QPG6105 ([specification](https://www.qorvo.com/products/p/QPG6105)) is a multi-standard Smart Home Communications Controller featuring Dynamic Multi-Protocol and ConcurrentConnect™ technology. This enables Bluetooth® Low Energy, Zigbee® and Thread to operate simultaneously in a single chip design.  
+The QPG6105 ([specification](https://www.qorvo.com/products/p/QPG6105)) is a multi-standard Smart Home Communications Controller featuring Dynamic Multi-Protocol and ConcurrentConnect™ technology. This enables Bluetooth® Low Energy, Zigbee® and Thread to operate simultaneously in a single chip design.
 ConcurrentConnect™ technology: allowing instantaneous switching between Bluetooth Low Energy and IEEE 802.15.4 protocols with no observable blind spots.
-
 
 ---
 
@@ -51,10 +50,10 @@ On the QPG6105, we distinguish 4 levels.
 
 ![Architectural overview](./imgs/architecture.png "Architectural overview")
 
-From top to bottom:  
+From top to bottom:
 **Note:** paths are relative to the [root of the ot-qorvo repository](https://github.com/openthread/ot-qorvo)
 
-- The Application:  
+- The Application:
   - location: [`openthread/example/apps`](https://github.com/openthread/openthread/tree/main/examples/apps)
   - what: For this example the *OpenThread CLI* application will be built. This application allows the manipulation of the Thread stack over a serial interface.
 - OpenThread Stack:
@@ -65,7 +64,7 @@ From top to bottom:
   - what: code to interface *OpenThread* with platform specific things such as alarms, storage, random number generator, …
 - Drivers
   - location: [`third_party/Qorvo/repo/qpg6105`](https://github.com/Qorvo/qpg-openthread/tree/master/qpg6105), but hosted in a [Qorvo repository](https://github.com/Qorvo/qpg-openthread)
-  - what: Qorvo specific code and libraries required to build for and interface with the QPG6105 platform.  
+  - what: Qorvo specific code and libraries required to build for and interface with the QPG6105 platform.
   - specifically (relative to *location*):
     - `ld/qpg6105.ld`: linker script for the QPG6105
     - `lib/libQorvoQPG6105_ftd.a`: library for *Full Thread Device* support
@@ -92,7 +91,7 @@ To resolve any outstanding dependencies to build *OpenThread*, run the optional
 
     ./script/bootstrap
 
-**Note 1:** The script will install a *gnu embedded toolchain*, but the one in [Prerequisites](#prerequisites) will be used in this example.  
+**Note 1:** The script will install a *gnu embedded toolchain*, but the one in [Prerequisites](#prerequisites) will be used in this example.
 **Note 2:** The final step of this script will fail if _Linuxbrew_ is not installed. The error can be ignored.
 
 ### Command Line Interface (CLI) build for the QPG6105
@@ -116,11 +115,11 @@ This will build the CLI application for both the *Minimal Thread Device* and the
 
 For a *FTD* the following build command can be used
 
-    ./script/build qpg6105 -DOT_COMMISSIONER=1 -DOT_DHCP6_CLIENT=1 -DOT_DHCP6_SERVER=1 -DOT_JOINER=ON
+    ./script/build qpg6105 -DOT_COMMISSIONER=1 -DOT_DHCP6_CLIENT=1 -DOT_DHCP6_SERVER=1
 
 For a *MTD*, the following is sufficient
 
-    ./script/build qpg6105 -DOT_DHCP6_CLIENT=1 -DOT_JOINER=ON
+    ./script/build qpg6105 -DOT_DHCP6_CLIENT=1
 
 **Note:** both the above command will always build both the *FTD* and *MTD* executable. But it is unnecessary for a *MTD* device to support e.g. the *Commissioner* role or the DHCP server functionality.
 
@@ -150,5 +149,3 @@ Please visit [www.qorvo.com](https://www.qorvo.com) for more information on our 
 Additional generic information can be found on
 
 - <https://github.com/openthread/openthread>
-- <https://openthread.io>
-- <https://groups.google.com/g/openthread-users>
