@@ -36,6 +36,14 @@ All files required are stored in this repository under
 
     ./qpg6105
 
+#### QPG6200
+
+Thread examples are available for the QPG6200 IoT Development Kit board. See [QPG6200 instructions](qpg6200/doc/README.md) to setup an OpenThread application on this platform.
+
+All files required are stored in this repository under
+
+    ./qpg6200
+
 ### Transceiver/Co-Processor platforms
 
 #### GP712
@@ -58,4 +66,4 @@ All files required are stored in this repository under
 
 For more information on our product line and support options
 Please visit [www.qorvo.com](www.qorvo.com)
-or contact us at <LPW.support@qorvo.com>
+or contact us at <appsupport@qorvo.com>
