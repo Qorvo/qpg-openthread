@@ -79,11 +79,11 @@ From top to bottom:
       - `lib/libQorvoQPG7015M_ftd.a`: library for *Full Thread Device* support
       - `lib/libQorvoQPG7015M_mtd.a`: library for *Minimal Thread Device* support
 - Kernel drivers
-  - Driver `.ko` files, the necessary deploy instruction and other documentation need to be obtained through <LPW.support@qorvo.com> or through your business contact.
+  - Driver `.ko` files, the necessary deploy instruction and other documentation need to be obtained through <appsupport@qorvo.com> or through your business contact.
 
 All the parts in _User space_ will be compiled into a single executable `.elf` file. This executable communicates with the RPi kernel drivers provided in the QPG7015M Development Kit.
 
-To obtain the Development Kit and associated drivers contact us at <LPW.support@qorvo.com> or through your business contact.
+To obtain the Development Kit and associated drivers contact us at <appsupport@qorvo.com> or through your business contact.
 
 ### Getting Qorvo *OpenThread*
 
@@ -156,7 +156,7 @@ Validating the Thread operation can be done by running the scenarios [here](../.
 ## Additional resources
 
 Please visit [www.qorvo.com](https://www.qorvo.com) for more information on our product line, or more specifically the [QPG7015M product page](https://www.qorvo.com/products/p/QPG7015M) or contact us at
-<LPW.support@qorvo.com>.
+<appsupport@qorvo.com>.
 
 Additional generic information can be found on
 
