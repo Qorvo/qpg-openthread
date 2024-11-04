@@ -46,8 +46,6 @@ SECTIONS
     .isr_vector : ALIGN(0x100) { KEEP(*(.isr_vector)); } > CODE_NRT
 
 
-
-    /* Reserve space for RT system in CODE_NRT */
     rt_system_start_offset = 0x13400;
     .rt_flash    0x10013400  : {. = ALIGN(4); *(.rt_flash);    } > CODE_NRT
 
@@ -92,7 +90,10 @@ SECTIONS
     /* Start of memory to be retained in sleep */
     _sretain = 0x40000000;
 
-    .esevents 0x40000680 : { . += 0x100; } >  SYSRAM
+    .retain_header ORIGIN(SYSRAM) : { . += 0x10; } > SYSRAM
+    .cal_ram_regmap ADDR(.retain_header) + SIZEOF(.retain_header) : { . += 0x100; } > SYSRAM
+    .retain_body ADDR(.cal_ram_regmap) + SIZEOF(.cal_ram_regmap) : { . += 0x400; } > SYSRAM
+    .esevents 0x40000600 : { . += 0x100; } >  SYSRAM
     .sysram (NOLOAD) :
     {
         . = ALIGN(4);
@@ -193,6 +194,7 @@ SECTIONS
         gpNvm_End = . ;
     } > CODE_NRT
     /* Linker Symbols */
+    _sappuc_fw_header   = ADDR(.appuc_fw_header);
     _fw_header_vpp    = ADDR(.isr_vector) >> 8;
     _loaded_user_license_vpp    = ADDR(.isr_vector) >> 8;
     _etext  = ADDR(.text) + SIZEOF(.text);
@@ -203,6 +205,12 @@ SECTIONS
     _sbss   = ADDR(.bss);
     _ebss   = ADDR(.bss)  + ALIGN(SIZEOF(.bss),  4);
     _lbss   = _ebss - _sbss;
+    __sysram_retain_header_start = ADDR(.retain_header);
+    __sysram_retain_header_end = ADDR(.retain_header) + SIZEOF(.retain_header);
+    __sysram_retain_body_start = ADDR(.retain_body);
+    __sysram_retain_body_end = ADDR(.retain_body) + SIZEOF(.retain_body);
+    __sysram_esevents_start = ADDR(.esevents);
+    __sysram_esevents_end = ADDR(.esevents) + SIZEOF(.esevents);
     _sysram_start = ORIGIN(SYSRAM);
     _sysram_length = sysram_end - _sysram_start;
     _akram_start = ORIGIN(AKRAM_NRT);
